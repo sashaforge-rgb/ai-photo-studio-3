@@ -5,13 +5,9 @@ import { Model, UploadedImage, AspectRatio } from '../types';
 // This function creates a new GoogleGenAI instance on demand,
 // ensuring it always uses the latest API key from the environment.
 const getAiClient = () => {
-    const apiKey = process.env.API_KEY;
-    if (!apiKey) {
-        console.warn("API_KEY environment variable not set. The app may not function correctly.");
-        // Return a client with a placeholder key to avoid crashing, but API calls will fail.
-        return new GoogleGenAI({ apiKey: 'MISSING_API_KEY' });
-    }
-    return new GoogleGenAI({ apiKey });
+    // Per coding guidelines, assume process.env.API_KEY is always available and use it directly.
+    // The key's availability is handled externally.
+    return new GoogleGenAI({ apiKey: process.env.API_KEY });
 };
 
 const extractImageFromResponse = (response: GenerateContentResponse): string | null => {

@@ -8,18 +8,7 @@ import ImageGenerator from './components/ImageGenerator';
 import ImageEditor from './components/ImageEditor';
 import ApiKeyPrompt from './components/ApiKeyPrompt';
 
-// Assume window.aistudio exists for API key selection
-// FIX: Defined an AIStudio interface to resolve the subsequent property declaration error for 'aistudio'.
-interface AIStudio {
-  hasSelectedApiKey: () => Promise<boolean>;
-  openSelectKey: () => Promise<void>;
-}
-
-declare global {
-  interface Window {
-    aistudio?: AIStudio;
-  }
-}
+// The global type for window.aistudio is now defined in types.ts.
 
 const App: React.FC = () => {
   const [activeTool, setActiveTool] = useState<Tool>(Tool.GENERATE);

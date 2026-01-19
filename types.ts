@@ -1,4 +1,3 @@
-
 export enum Tool {
   GENERATE = 'Генерация фото',
   PORTRAIT = 'Портретный адаптер',
@@ -20,3 +19,17 @@ export interface UploadedImage {
 }
 
 export type AspectRatio = "1:1" | "3:4" | "4:3" | "9:16" | "16:9";
+
+// Centralize AIStudio interface and global declaration to avoid type conflicts across files.
+// FIX: Removed 'export' from AIStudio to fix "Subsequent property declarations" error.
+// The interface is used for global augmentation and does not need to be exported.
+interface AIStudio {
+  hasSelectedApiKey: () => Promise<boolean>;
+  openSelectKey: () => Promise<void>;
+}
+
+declare global {
+  interface Window {
+    aistudio?: AIStudio;
+  }
+}
